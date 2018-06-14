@@ -1,0 +1,518 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+
+%\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
+
+\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+\usepackage[brazil]{babel} % coisas em portugues.
+\usepackage[T1]{fontenc}
+\usepackage{graphicx} % insercao de figuras
+% estilo das fontes das lagendas das figuras
+\usepackage[font=scriptsize, justification=centering]{caption}
+% funcoes matematicas
+\usepackage{amsmath} % assumes amsmath package installed
+% Define o caminho das figuras
+\graphicspath{{imagens/}}
+
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                          % you want to use the \thanks command
+
+\overrideIEEEmargins                                      % Needed to meet printer requirements.
+
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+
+% The following packages can be found on http:\\www.ctan.org
+%\usepackage{graphics} % for pdf, bitmapped graphics files
+%\usepackage{epsfig} % for postscript graphics files
+%\usepackage{mathptmx} % assumes new font selection scheme installed
+%\usepackage{times} % assumes new font selection scheme installed
+%\usepackage{amssymb}  % assumes amsmath package installed
+
+\title{\LARGE \bf
+O Time Carrossel Caipira de Futebol de Rob{\^o}s
+}
+
+\author{{      \centering Danilo Weber Nunes$^{1}$, Rodrigo Bueno dos Reis Rodrigues de Siqueira$^{1}$, Luis Fernando de Oliveira Uzai$^{1}$,}%
+{\authorblockN \centering Marcelo Nu{\~n}ez$^{1}$, Alisson Francisco Eduardo Mota$^{1}$, João Pedro Marin Comini$^{1}$, Paulo Eduardo Manzone Maia$^{1}$,}%
+{\authorblockN \centering Paulo Jin Sol Kim$^{1}$, Rafael Tatsuki Takagi$^{1}$, Rodney Renato de Souza Silva$^{1}$, Marcelo Hideaki Iwata Kito$^{1}$,}%
+{\authorblockN \centering Mateus B. Santos$^{1}$, Everton Kelvin Francisco$^{2}$, Carla Cristina dos Santos$^{3}$, Thiago Men{\~a}o Mochetti$^{4}$, André}%
+{\authorblockN \centering Neves Costa da Silva$^{4}$, Luana dos Santos Perei$^{4}$, Maria Carolina Estevam Mafra$^{4}$, Thaís Casoni$^{4}$, Matheus}%
+{\authorblockN \centering Alves de Sousa Viana$^{4}$, Izabele Pizzo Ferreira$^{5}$, Jorge Vicente Oliva Gonçalves$^{6}$, Lumary Dinalle Marcolino$^{7}$}%
+\thanks{$^{1}$Luis Fernando de Oliveira Uzai (email: luisuzai13@gmail.com),
+Rodrigo Bueno dos Reis Rodrigues de Siqueira (email: rodrigo.buenorrs@gmail.com),
+Marcelo Nuñez (email: marcelo.nunez@hotmail.com), Danilo Weber Nunes (email: danilownunes@gmail.com), 
+Alisson Francisco Eduardo Mota (email: aem.internet@gmail.com), João Pedro Marin Comini  (email: joaocomini@gmail.com), 
+Marcelo Hideaki Iwata Kito (email: hideaki.kito@gmail.com), Paulo Eduardo Manzone Maia (email: pmanzonemaia@gmail.com),
+Paulo Jin Sol Kim (email: p12ulo@gmail.com), Rafael Tatsuki Takagi (email: rafaelttakagi@gmail.com),
+Rodney Renato de Souza Silva (email: ro.rss.129@gmail.com) e
+Mateus B. Santos (email: mateusbatistasantos@gmail.com)
+são alunos de 
+Bacharelado em Ciência da Computação.}
+\thanks{$^{2}$Everton Kevin Francisco (email: everton\_kelvin@hotmail.com) {\'e} aluno de Bacharelado em Sistemas de Informa{\c c}{\~a}o.}
+\thanks{$^{3}$Carla Cristina dos Santos Carla Cristina dos Santos (email: ccsantos@hotmail.com.br), {\'e} Bacharel em Engenharia de Controle
+e Automa{\c c}{\~a}o e atualmente estudante de Bacharel e Licenciatura em F{\'i}sica.}
+\thanks{$^{4}$Thiago Men{\~a}o Mochetti (email: thiagomochetti@gmail.com), André Neves Costa da Silva (email: neves.andre27@gmail.com),
+Luana dos Santos Pereira (email: luh.inf@gmail.com), Maria Carolina Estevam Mafra (email: carolmafra10@gmail.com),
+Thaís Casoni (email: thais\_casoni@hotmail.com) e Matheus Alves de Sousa Viana (email: mathvna@gmail.com) s{\~a}o alunos de Engenharia El{\'e}trica da Unesp, campus de Bauru.}
+\thanks{$^{5}$Izabele Pizzo Ferreira (email: izabelepizzo@gmail.com) {\'e} aluna de Arquitetura e Urbanismo.}
+\thanks{$^{6}$Jorge Vicente Oliva Gonçalves (email: meunomeejorgevicente@gmail.com) {\'e} aluno de Matem{\'a}tica.}
+\thanks{$^{7}$Lumary Dinalle Marcoluino, (email: lumarydinalle@gmail.com) {\'e} aluna de Relações P{\'u}blicas.}
+}
+
+
+\begin{document}
+\selectlanguage{brazil}
+
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+% redefinindo abstract como resumo
+\renewenvironment{abstract}{\small \bf {\textit{Resumo}---}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+Este artigo apresenta aspectos de hardware e software do time Carrossel Caipira, que representa o
+Departamento de Computa{\c c}{\~a}o da UNESP, campus de Bauru, na modalidade IEEE Very Small Size de futebol de rob{\^o}s. O
+Hardware {\'e} composto por tr{\^e}s rob{\^o}s que utilizam Arduino para controle dos motores e recebimento de sinais de r{\'a}dio, que s{\~a}o
+enviados por um computador pessoal. O Software, executado neste computador, {\'e} composto por um conjunto de m{\'o}dulos que
+inclui: Vis{\~a}o, Estrat{\'e}gia e Controle.
+\end{abstract}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{INTRODU{\c C}{\~A}O}
+
+O Departamento de Computa{\c c}{\~a}o da Faculdade de Ci{\^e}ncias
+da UNESP, campus de Bauru, participa de competi{\c c}ões de
+futebol de rob{\^o}s, na modalidade Very Small Size (atualmente
+IEEE Very Small), desde 1998, com a realiza{\c c}{\~a}o do 1\textordmasculine
+Campeonato Brasileiro de Futebol de Rob{\^o}s -- CBFR 98. A
+pesquisa e o desenvolvimento em futebol de rob{\^o}s, atualmente
+pelo Grupo de Integra{\c c}{\~a}o de Sistemas e Dispositivos
+Inteligentes (GISDI), mant{\'e}m o objetivo de incentivar o uso de
+inova{\c c}ões tecnol{\'o}gicas, no campo da rob{\'o}tica, de baixo custo e
+com componentes encontrados no mercado nacional. Apesar
+de diversos per{\'i}odos de aus{\^e}ncia, o time de futebol da UNESP
+de Bauru {\'e} conhecido, desde a primeira edi{\c c}{\~a}o desta
+competi{\c c}{\~a}o no Brasil, como Carrossel Caipira devido sua
+estrat{\'e}gia de jogo. O projeto atual {\'e} a quinta vers{\~a}o, de rob{\^o}s
+desenvolvidos para futebol de rob{\^o}s, com aprimoramentos em
+rela{\c c}{\~a}o ao time de 2015.
+
+No ambiente do futebol de rob{\^o}s, nesta categoria, os rob{\^o}s
+e a bola s{\~a}o identificados atrav{\'e}s de uma c{\^a}mera utilizada
+como vis{\~a}o global, posicionada a 2m sobre o campo e alinhada
+ao seu centro, que captura imagens da arena. Estas imagens s{\~a}o
+processadas digitalmente obtendo as coordenadas dos rob{\^o}s da bola.
+A partir dessas coordenadas, uma estrat{\'e}giaescolhida e transformada em comandos que s{\~a}o enviados aos
+rob{\^o}s por r{\'a}dio. Os rob{\^o}s recebem estes comandos e realizam
+as a{\c c}ões correspondentes, modificando a posi{\c c}{\~a}o dos
+elementos presentes no ambiente real, que ser{\'a} capturado
+novamente pela c{\^a}mera. A Fig. 1 apresenta uma ilustra{\c c}{\~a}o do
+ambiente do futebol de rob{\^o}s.
+
+% FIGURA 1
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.5]{fut_robos.png}
+\caption{Ambiente para futebol de rob{\^o}s. Fonte:www.mecatronicaatual.com.br/secoes/leitura/950 (2013)}
+\label{Rotulo}
+\end{figure}
+%%%
+
+O futebol rob{\'o}tico abrange diversas {\'a}reas do conhecimento.
+Na constru{\c c}{\~a}o do rob{\^o} s{\~a}o aplicados conceitos de mec{\^a}nica,
+eletr{\^o}nica e sistemas embarcados. Do ponto de vista do
+software, executado no computador pessoal, est{\~a}o envolvidos
+elementos de processamento de imagens, intelig{\^e}ncia artificial
+e teoria de controle. Essa abrang{\^e}ncia faz desta modalidade de
+futebol uma ferramenta pedag{\'o}gica com poss{\'i}veis aplica{\c c}ões
+no ensino.
+Esse projeto busca incentivar e facilitar o desenvolvimento
+da rob{\'o}tica, para isso o artigo faz uma apresenta{\c c}{\~a}o das tarefas
+realizadas, enfatizando a melhoria aplicada recentemente no
+simulador do ambiente para divulgar a efici{\^e}ncia obtida ap{\'o}s
+essa modifica{\c c}{\~a}o.
+
+\section{SISTEMA DE SOFTWARE DO FUTEBOL DE ROB{\^O}S}
+
+O sistema deste time pode ser representado
+simplificadamente atrav{\'e}s do diagrama apresentado na Fig. 2
+que indica as partes principais do processamento. Estas partes
+s{\~a}o descritas, juntamente com as intera{\c c}ões entre elas, na
+sequ{\^e}ncia. A C{\^A}MERA captura uma imagem do campo que {\'e}
+digitalizada por uma placa espec{\'i}fica. Esta imagem {\'e} processada pelo m{\'o}dulo de 
+VIS{\~A}O que determinar{\'a} as posi{\c c}{\~o}es atuais dos rob{\^o}s a partir de suas etiquetas coloridas 
+e a da bola que possui cor alaranjada. A PREVIS{\~A}O, com base das informações recebidas do m{\'o}dulo da
+VIS{\~A}O, define as posi{\c c}{\~o}es mais prov{\'a}veis que os objetos em campo ir{\~a}o 
+assumir alguns instantes a frente. Com estas posi{\c c}{\~o}es (presente e futura). O m{\'o}dulo de
+ESTRAT{\'E}GIA calcula os locais do campo que os rob{\^o}s do time controlado dever{\~a}o se posicionar. 
+Para realizar estes c{\'a}lculos, este m{\'o}dulo faz uso de roteiros, que são específicos para cada rob{\^o}.
+Basicamente, um roteiro {\'e} um conjunto de comportamentos espec{\'i}ficos para cara rob{\^o} que faz com que
+este assuma uma postura defensiva ou ofenciva durante uma partida. O m{\'o}dulo de CONTROLE, fazendo uso das 
+posi{\c c}{\~a}o atuais de cada rob{\^o} (VIS{\~A}O) e de seus objetivos (ESTRAT{\'E}GIA), determina maior
+velocidade poss{\'i}vel que um rob{\^o} pode assumir para que este consiga chegar ao seu objetivo e parar,
+definindo os valores de cada roda a serem enviados aos rob{\^o}s via r{\'a}dio, fazendo os rob{\^o}s se moverem 
+para concluir a estrat{\'e}gia. Todos estes m{\'o}dulos s{\~a}o executados no computador pessoal.
+
+% FIGURA 2
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=240pt, height=160pt]{novo_carrosselTDP.png}
+\caption{Diagrama simplificado dos m{\'o}dulos do time Carrossel Caipira.}
+\label{Rotulo}
+\end{figure}
+%%%
+
+\subsection{M{\'o}dulo da Vis{\~a}o}
+
+No ambiente de futebol de rob{\^o}s toda a estrat{\'e}gia e o
+controle, tanto de baixo n{\'i}vel quanto de alto n{\'i}vel, s{\~a}o
+baseados na interpreta{\c c}{\~a}o das imagens captadas pela c{\^a}mera.
+Para que isso seja realizado, etiquetas de cores em destaque
+localizadas no topo dos rob{\^o}s identificam cada um deles, em
+rela{\c c}{\~a}o a seu time e possivelmente sua fun{\c c}{\~a}o, conforme
+demonstra a Fig. 3.
+
+O tempo de execu{\c c}{\~a}o do ciclo de controle do sistema foi
+definido pela taxa de aquisi{\c c}{\~a}o de imagens. Como o time
+Carrossel Caipira usa c{\^a}meras de v{\'i}deo convencionais, a taxa {\'e}
+limitada a 30 quadros por segundo. Portanto, a cada per{\'i}odo de
+33 ms, uma nova imagem refletindo o estado atual do campo
+torna-se dispon{\'i}vel ao computador para processamento. Cada
+uma dessas imagens {\'e} capturada e digitalizada por uma placa
+de captura, que disponibiliza, na forma de uma matriz com
+dimensões 640x480 pixels com tr{\^e}s canais (componentes Red,
+Green, Blue - RGB). Cada um desses pixels deve ser analisado,
+quanto a sua cor, para identificar se {\'e} uma cor de import{\^a}ncia
+ao sistema, esta t{\'e}cnica {\'e} chamada de segmenta{\c c}{\~a}o de cor.
+
+% FIGURA 3
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.9]{etiqueta.png}
+\caption{ Etiqueta de identifica{\c c}{\~a}o do rob{\^o}}
+\label{Rotulo}
+\end{figure}
+%%%
+
+\subsection{M{\'o}dulo de Estrat{\'e}gia}
+
+A estrat{\'e}gia {\'e} o m{\'o}dulo respons{\'a}vel por definir a meta de
+cada rob{\^o}. Utilizando as coordenadas atuais e previstas da bola, dos
+rob{\^o}s do time e dos advers{\'a}rios este m{\'o}dulo decide qual {\'e} a posi{\c c}{\~a}o 
+mais indicada para cada rob{\^o} do time, de tal forma que corresponda ao comportamento que
+os rob{\^o}s devem desempenhar na partida. No caso do time Carrossel Caipira
+tem-se tr{\^e}s tipos de comportamentos: goleiro, defensor e
+atacante.
+
+{\bf Goleiro}: O rob{\^o} {\'e} posicionado na proje{\c c}{\~a}o da posi{\c c}{\~a}o da
+bola com a linha defensiva do gol, se a bola vir diretamente na
+dire{\c c}{\~a}o da regi{\~a}o do gol. Caso contr{\'a}rio o rob{\^o} se alinha com a
+bola na coordenada y do sistema, dessa forma sempre permanecendo em
+frente ao gol. Para permitir que o posicionamento seja r{\'a}pido, o rob{\^o} deve
+manter sua orienta{\c c}{\~a}o em 90 ou 270 graus, como {\'e} mostrado
+na Fig. 4.
+
+% FIGURA 4
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.5]{pos_goleiro.png}
+\caption{Comportamento do goleiro. Fonte: Costa et al. [3].}
+\label{Rotulo}
+\end{figure}
+%%%
+
+{\bf Volante}: O rob{\^o} {\'e} posicionado na dire{\c c}{\~a}o da coordenada y
+da bola, bloqueando a bola e impedindo seu avan{\c c}o at{\'e} o gol.
+Mas deve permitir a bola passar se ela estiver sendo conduzida
+pelo atacante. Quando o volante e a bola est{\~a}o em situa{\c c}{\~a}o
+favor{\'a}vel no que diz respeito a um poss{\'i}vel ataque ao gol
+advers{\'a}rio, ele troca de comportamento com o atacante e tenta
+atacar. A situa{\c c}{\~a}o favor{\'a}vel acontece quando o defensor
+estiver pr{\'o}ximo da bola em posi{\c c}{\~a}o de ataque.
+
+{\bf Atacante}: Nesta posi{\c c}{\~a}o existem dois tipos de
+comportamento: (i) modo de posicionamento: quando o
+objetivo {\'e} posicionar o rob{\^o} atr{\'a}s da bola para bloquear algum
+advers{\'a}rio ou deixar o rob{\^o} apto para trocar seu modo; (ii)
+modo de condu{\c c}{\~a}o, quando o rob{\^o} empurra a bola at{\'e} o gol.
+
+Atrav{\'e}s destes comportamentos {\'e} calculada a posi{\c c}{\~a}o que o
+rob{\^o} deve atingir, ou seja, as coordenadas x, y e o {\^a}ngulo que o
+rob{\^o} deve alcan{\c c}ar para realizar a estrat{\'e}gia espec{\'i}ficada por seu roteiro.
+Esta posi{\c c}{\~a}o {\'e} importante para o m{\'o}dulo de Controle, no que se
+refere ao planejamento do caminho {\'o}timo, pois define o fim do
+trajeto (o objetivo) escolhido por ele, bem como o {\^a}ngulo desejado de chegada, permitindo
+calcular a forma como o rob{\^o} deve chegar l{\'a}.
+
+\subsection{M{\'o}dulo de Controle}
+
+A partir das coordenadas detectadas pelo m{\'o}dulo de Vis{\~a}o
+e das coordenadas atribu{\'i}das pelos resultados do m{\'o}dulo de
+Estrat{\'e}gia, o m{\'o}dulo de Controle deve determinar as melhores
+trajet{\'o}rias e comandos a ser enviados aos rob{\^o}s.
+
+O c{\'a}lculo de uma trajet{\'o}ria deve levar em conta o desvio de
+obst{\'a}culos, evitando os outros rob{\^o}s na arena. Este c{\'a}lculo {\'e}
+necess{\'a}rio para levar o rob{\^o} da sua posi{\c c}{\~a}o atual at{\'e} a
+determinada pela estrat{\'e}gia. No caso do time Carrossel Caipira,
+{\'e} empregado um m{\'e}todo chamado de campo potencial. Os
+campos potenciais partem da ideia de for{\c c}as imagin{\'a}rias
+atuando sobre o rob{\^o}, ideia proposta por Khatib [4], na qual a
+''for{\c c}a causada'' pelos obst{\'a}culos {\'e} de car{\'a}ter repulsivo e pela
+meta, de car{\'a}ter atrativo. Por{\'e}m a interfer{\^e}ncia das ''for{\c c}as''?
+geradas a partir de v{\'a}rios obst{\'a}culos podem produzir locais
+{\'o}timos que atrapalham o desempenho do sistema para
+encontrar um caminho at{\'e} a meta para o rob{\^o}.
+
+Para evitar esta situa{\c c}{\~a}o, Connoly et al. [5] solucionaram
+o problema utilizando fun{\c c}ões harm{\^o}nicas para o c{\'a}lculo do
+campo potencial de ambientes nos quais as posi{\c c}ões das
+paredes, objetos e metas sejam conhecidas, que {\'e} o caso do
+ambiente de futebol de rob{\^o}s. As fun{\c c}ões harm{\^o}nicas
+utilizadas s{\~a}o solu{\c c}ões para a equa{\c c}{\~a}o de Laplace (1).
+\begin{equation}
+\nabla = 0 \ para \ P : R \rightarrow R .
+\end{equation}
+
+Assim {\'e} definido um Problema de Valor de Contorno na
+regi{\~a}o de atua{\c c}{\~a}o do rob{\^o} utilizando a condi{\c c}{\~a}o de Dirichlet%
+\footnote{A condição de contorno de Dirichlet (ou de primeiro tipo) é um tipo
+de condição de contorno, nomeada em homenagem a Johann Peter
+Gustav Lejeune Dirichlet (1805-1859). Quando aplicada sobre uma
+equação diferencial ordinária ou parcial, especifica os valores que uma
+solução necessita para tomar-se sobre o contorno do domínio
+}
+com potencial alto para obst{\'a}culos e potencial baixo para a
+meta. Ent{\~a}o, s{\~a}o extra{\'i}das as linhas de for{\c c}a, com base no
+gradiente descendente [5][6] do potencial, que direcionam o
+rob{\^o} para sua meta, desviando-o de obst{\'a}culos.
+
+Uma vez obtido o campo potencial, tem-se o {\^a}ngulo ideal
+que o rob{\^o} deve atingir para se deslocar at{\'e} a meta, que
+chamamos de {\^a}ngulo objetivo, basta agora calcular a dire{\c c}{\~a}o e
+velocidade de cada motor.
+
+\section{SIMULADOR E TESTES}
+
+O desenvolvimento e os testes utilizaram o simulador no
+time da UNESP-Bauru previamente existente. O simulador
+executa o m{\'o}dulo de estrat{\'e}gia e o de controle, oriundos do
+software executado para o ambiente real, sem altera{\c c}ões nos
+c{\'o}digos. Apenas os arquivos de c{\'o}digos dos dois m{\'o}dulos
+(estrat{\'e}gia e controle) da pasta de fontes destinado ao ambiente
+real precisam ser transportados para a pasta do simulador,
+nenhuma outra altera{\c c}{\~a}o precisa ser realizada. Apesar da
+din{\^a}mica ser pouco considerada neste simulador, ele simplifica
+a realiza{\c c}{\~a}o de testes dos algoritmos em desenvolvimento, sem
+a necessidade da montagem do ambiente real. Uma imagem do
+simulador em uma situa{\c c}{\~a}o de jogo pode ser na vista na Fig. 5.
+O simulador pode tamb{\'e}m apresentar o campo potencial
+gerado pelo m{\'o}dulo de controle, Fig. 6.
+
+% FIGURA 5
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.4]{simulador.png}
+\caption{Situa{\c c}{\~a}o representada pelo simulador.}
+\label{Rotulo}
+\end{figure}
+%%%
+
+% FIGURA 6
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.3]{simulador_CP.png}
+\caption{Representa{\c c}{\~a}o do campo potencial para a situa{\c c}{\~a}o apresentada na
+Fig. 5 considerando o rob{\^o} 1V (volante). Nos quais os quadrados preto, verde
+e azul representam respectivamente meta, rob{\^o} e obst{\'a}culo.}
+\label{Rotulo}
+\end{figure}
+%%%
+
+Para que os teste pudessem gerar an{\'a}lises convincentes em
+rela{\c c}{\~a}o ao desenvolvimento da estrat{\'e}gia e do controle, foi
+necess{\'a}rio acrescentar uma nova funcionalidade que
+permitisse dois times jogarem entre si. Para isso foi
+desenvolvido no c{\'o}digo do simulador a possibilidade de se
+comunicar em rede, de tal forma que houvessem dois times
+clientes, cada um com sua estrat{\'e}gia e controle, se
+comunicando com o servidor do simulador, que efetiva os
+comandos enviados por cada cliente, realizando a
+movimenta{\c c}{\~a}o dos rob{\^o}s e da bola virtualmente, e fazendo o
+papel da vis{\~a}o ao fornecer o estado de cada rob{\^o} para os times
+clientes. Para a comunica{\c c}{\~a}o entre os clientes e o servidor
+optou-se por um protocolo de comunica{\c c}{\~a}o simples, o User
+Datagram Protocol (UDP).
+
+Desta forma mudou-se a forma como o simulador funciona.
+Na Fig. 7 {\'e} apresentado o esquema, de forma simplificada, do
+simulador antigo, em que a estrat{\'e}gia recebe o estado do rob{\^o},
+calcula o objetivo e envia para o controle. O controle vai
+calcular a trajet{\'o}ria e o comando que ser{\'a} enviado para cada
+roda, que ser{\'a} enviado para o simulador que efetua a
+movimenta{\c c}{\~a}o.
+
+% FIGURA 7
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.5]{esquema_simulador.png}
+\caption{Simulador antes das altera{\c c}{\~o}es.}
+\label{Rotulo}
+\end{figure}
+%%%
+
+Na Fig. 8 {\'e} apresentado o esquema do simulador atual, no
+qual o simulador torna-se um servidor, que recebe os
+comandos de cada roda, efetua-os e em seguida envia o estado
+do rob{\^o} para os clientes. Os clientes recebem o estado,
+calculam o objetivo atrav{\'e}s da estrat{\'e}gia e os comandos a ser
+enviados para o simulador atrav{\'e}s do controle, na sequ{\^e}ncia
+esse comando {\'e} enviado para o servidor que efetuar{\'a} a
+movimenta{\c c}{\~a}o dos rob{\^o}s. Al{\'e}m disso, tem-se a representa{\c c}{\~a}o
+para a conex{\~a}o de um cliente, mas a representa{\c c}{\~a}o {\'e} a mesma
+para dois clientes, que {\'e} o caso do futebol de rob{\^o}s.
+
+% FIGURA 8
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.5]{esqumatica_simulador.png}
+\caption{ Simulador ap{\'o}s altera{\c c}{\~o}es, representando uma conex{\~a}o.}
+\label{Rotulo}
+\end{figure}
+%%%
+
+Assim, o novo simulador permite intera{\c c}{\~a}o entre dois times
+virtuais, levando em considera{\c c}{\~a}o a din{\^a}mica, cinem{\'a}tica e
+demais constantes f{\'i}sicas referentes ao rob{\^o} do time Carrossel
+Caipira, possibilitando a compara{\c c}{\~a}o atrav{\'e}s de estat{\'i}sticas
+que podem ser coletadas durante a execu{\c c}{\~a}o do programa, na
+figura 9 temos a imagem do novo simulador.
+
+% FIGURA 9
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.48]{simulador2.png}
+\caption{ Simulador ap{\'o}s altera{\c c}{\~o}es, representando uma conex{\~a}o.}
+\label{Rotulo}
+\end{figure}
+%%%
+
+Nesta vers{\~a}o, o simulador procura entender o
+comportamento da estrat{\'e}gia e controle estudados, atrav{\'e}s de
+situa{\c c}ões de jogo como: placar total, gols contra, p{\^e}naltis
+usufru{\'i}do pelo time Carrossel Caipira para o desenvolvimento
+das pesquisas envolvendo futebol de cometidos, p{\^e}naltis
+convertidos, gols de cada rob{\^o}, n{\'u}mero de free balls e tempo de
+jogo. Al{\'e}m disto, {\'e} poss{\'i}vel verificar a evolu{\c c}{\~a}o do placar no
+decorrer da simula{\c c}{\~a}o e avaliar o intervalo de confian{\c c}a para
+estimar a margem de erro dos dados levantados. A an{\'a}lise
+quantitativa dos dados estimula a an{\'a}lise com dados reais feita
+no ambiente controlado do laborat{\'o}rio que complementa o
+ambiente instrumental rob{\^o}s.
+
+\section{PREVIS{\~A}O DE POSI{\c C}{\~A}O}
+
+Para possibilitar futuramente a realiza{\c c}{\~a}o de passes e
+aumentar a acur{\'a}cia dos jogadores com rela{\c c}{\~a}o a bola, est{\'a} foi
+desenvolvido um sistema de previs{\~a}o de posi{\c c}{\~a}o da bola e dos demais 
+componentes em campo com base no simulador do time Carrossel Caipira.
+Como as informa{\c c}{\~o}es do m{\'o}dulo de previs{\~a}o ser{\~a}o usadas pelo
+módulo da estratégia, a previs{\~a}o deve ocorrer antes da defini{\c c}{\~a}o do pr{\'o}ximo objetivo. 
+Sendo assim, este m{\'o}dulo foi inserido entre o módulo de visão e de estratégia.
+
+Em uma partida existem dois momentos, o de previsão e o de jogo. Enquanto o sistema
+está em jogo, todos os m{\'o}dulos trabalham para que cada jogador exer{\c c}a sua fun{\c c}{\~a}o. J{\'a} no
+estado de previs{\~a}o, suas fun{\c c}{\~o}es ficam restritas a simular o comportamento de todos os
+componentes em campo por um determinado espaço de tempo, porém sem que haja o acionamento dos robôs.
+
+Durante a previs{\~a}o, o m{\'o}dulo de estrat{\'e}gia {\'e} executado utilizando as posi{\c c}{\~o}es 
+atuais dos rob{\^o}s e atualiz{\'a}-las com base em seus respectivos roteiros. Atualmente {\'e} feita uma
+previs{\~a}o de 30 itera{\c c}{\~o}es, o que corresponde a 1 segundo, que é o suficiente para melhorar o 
+desempenho e continuar tendo um previsão realista.  
+
+\section{O HARDWARE DO ROB{\^O}}
+
+Ap{\'o}s o contato com outras equipes e pesquisa em rela{\c c}{\~a}o aos materiais, decidiu-se por reformular a estrutura 
+dos rob{\^o}s. Visando a simplifica{\c c}{\~a}o das montagens, bem como agilidade na manuten{\c c}{\~a}o, os rob{\^o}s 
+adquiriram um escopo modular. Dessa forma, cada conjunto de componentes respons{\'a}vel por um setor do rob{\^o} {\'e} 
+acoplado a um dos m{\'o}dulos separadamente. Assim, caso algum dos m{\'o}dulos apresente problemas de execu{\c c}{\~a}o, 
+ele pode ser trocado por outro igual reserva, sem que haja excessiva perda de tempo. Inicialmente, cogitou-se a 
+exist{\^e}ncia de tr{\^e}s m{\'o}dulos: os motores junto das rodas; a bateria; e a placa controladora com os componentes
+discretos. O m{\'o}dulo da placa controladora, que cont{\'e}m, entre outros componentes, o Arduino Nano[6], {\'e} agora 
+livre de fios e componentes soldados diretamente ao fenolite. Novamente em busca de agilidade na manuten{\c c}{\~a}o, 
+somente soquetes e caixas de pinos foram soldadas diretamente na placa, de modo que os componentes s{\~a}o remov{\'i}veis
+e de f{\'a}cil substitui{\c c}{\~a}o. A bateria, que {\'e} empregada agora no lugar das pilhas AA de vers{\~o}es 
+anteriores, ocupa sozinha, junto de um pequeno circuito de verifica{\c c}{\~a}o de carga, o segundo m{\'o}dulo. Isso 
+ocorre devido ao trabalho necess{\'a}rio para carreg{\'a}-la. Diferentemente das pilhas, onde bastava uma fonte de 
+alimenta{\c c}{\~a}o para recarregar o rob{\^o}, a bateria de l{\'i}tio exige um circuito pr{\'o}prio externo ao rob{\^o} 
+para carregar adequadamente. O circuito verificador de carga {\'e} respons{\'a}vel por impedir que a bateria chegue a 
+n{\'i}veis muito baixos, o que prejudicaria seu desempenho. O {\'u}ltimo dos m{\'o}dulos {\'e} composto pelos motores e 
+rodas. A {\'u}nica diferen{\c c}a desse sistema para o anterior {\'e} o di{\^a}metro das rodas, que cresceu 2mm, e seu 
+acabamento.
+
+O rob{\^o} foi constru{\'i}do tem um Arduino Nano[6] como m{\'o}dulo de controle. Este m{\'o}dulo recebe, via um 
+transceptor de r{\'a}dio NRF24L01, os comandos de velocidade desejados para cada uma das rodas. O Arduino aciona os 
+motores utilizando modula{\c c}{\~a}o por largura de pulso PWM (Pulse-Width Modulation) atrav{\'e}s 
+de uma placa equipada com o componente por um circuito impresso L293.
+
+A rota{\c c}{\~a}o das rodas, e consequentemente o deslocamento
+do rob{\^o}, s{\~a}o determinados por sensores TCRT5000, que
+codificam o movimento de dentes reflexivos fixados às rodas
+em pulsos enviados ao Arduino. Esses pulsos s{\~a}o contados e
+servem de realimenta{\c c}{\~a}o ao acionamento direcionado a cada
+motor. Um esquema representativo da eletr{\^o}nica do rob{\^o} pode
+ser apreciado na Fig 10 .
+
+Do lado do computador pessoal, o envio dos comandos
+tamb{\'e}m ocorre atrav{\'e}s de um circuito controlado por um
+Arduino Nano[6] conectado a uma interface USB. Este Arduino
+recebe os comandos a ser enviados aos rob{\^o}s e os transmite por
+meio de um transceptor de r{\'a}dio NRF24L01 id{\^e}ntico ao
+utilizados nos rob{\^o}s.
+
+% FIGURA 10
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.7]{robo.png}
+\caption{Esquema dos componentes eletr{\^o}nicos usados em cada rob{\^o}.}
+\label{Rotulo}
+\end{figure}
+%%%
+
+\section*{CONCLUS{\~A}O} 
+Os resultados obtidos foram satisfat{\'o}rios de um conjunto
+equilibrado e competitivo. O time utilizado em 2013,
+semelhante ao atual, se mostrou eficiente quando utilizado na
+XI CBR (Campeonato Brasileiro de Rob{\'o}tica), na qual o time
+da UNESP-Bauru, o Carrossel Caipira, conquistou o
+vice-campeonato da categoria IEEE Very Small Size de
+futebol de rob{\^o}s.
+
+O desenvolvimento do time foi norteado em componentes,
+mec{\^a}nicos, el{\'e}tricos e eletr{\^o}nicos encontrados no mercado
+nacional e de baixo custo, apresentando, desta forma, uma
+alternativa incentivadora a novos grupos para participarem
+deste tipo de competi{\c c}{\~a}o e ampliar as contribui{\c c}ões nesta {\'a}rea
+de pesquisa.
+
+\begin{thebibliography}{99}
+
+\bibitem{c1} UMBAUGH, S. E.; Digital Image Processing and Analysis: Human and Computer Vision Applications with CVIPtools, Second Edition, CRC Press,November 19, 2010
+\bibitem{c2} ALVES, S. F. R.; FERASOLI FILHO, H.; PEGORARO, R.; CALDEIRA, M. A. C.; ROSARIO, J. M.; YONEZAWA, W. M.; Proposal of educational environments with mobile robots; Conference on Robotics, Automation and Mechatronics (RAM), 2011.
+\bibitem{c3} COSTA, A. H. R. ; PEGORARO, R. . Construindo rob{\^o}s aut{\^o}nomos para partidas de futebol: o time GUARAN{\'a}. Controle \& Automa{\c c}{\~a}o, Campinas, SP, v. 11, n. 2, p. 141-149, 2000.
+\bibitem{c4} KHATIB, O.; Command Dynamic dans l'Espace Op{\'e}rationnel des Robots Manipulateurs en Pr{\'e}sence d'Osbtacles. PhD thesis, Ecole Nationale Sup{\'e}rieure de l'A{\'e}ronautique et de l'Espace, Toulouse. em Franc{\^e}s. 1980.
+\bibitem{c5} CONNOLLY, C. I., BURNS, J. B.; WEISS, R. Path planning using laplaces equation. In IEEE International Conference on Robotics and Automation, 1990.
+\bibitem{c6} CONNOLLY, C. I.; GRUPEN, R. A. On the application of harmonic functions to robotics. Journal of Robotic Systems, 10:931-946, 1993. Placa Arduino Nano 3.0. Dispom{\'i}vel em: <http://arduino.cc/en/Main/ArduinoBoardNano> Acesso em 3 de agosto de 2014.
+\bibitem{c7} SANTOS, Rafael, Mecanismo de Previs{\~a}o de Posi{\c c}{\~a}o para o Time de Futebol de Rob{\^o}s da UNESP, Trabalho de Conclus{\~a}o de Curso do Curso, UNESP - Universidade Estadual Paulista ''J{\'u}lio de Mesquita Filho'', Bauru, Brasil, Fev. 2017.
+\end{thebibliography}
+
+
+
+
+\end{document}
