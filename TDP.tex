@@ -1,0 +1,75 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2345678901234567890123456789012345678901234567890123456789012345678901234567890
+%        1         2         3         4         5         6         7         8
+
+%\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
+
+\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+\usepackage[brazil]{babel} % coisas em portugues.
+\usepackage[T1]{fontenc}
+\usepackage{graphicx} % insercao de figuras
+% estilo das fontes das lagendas das figuras
+\usepackage[font=scriptsize, justification=centering]{caption}
+% funcoes matematicas
+\usepackage{amsmath} % assumes amsmath package installed
+% Define o caminho das figuras
+\graphicspath{{imagens/}}
+
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+                                                          % you want to use the \thanks command
+
+\overrideIEEEmargins                                      % Needed to meet printer requirements.
+
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+
+% The following packages can be found on http:\\www.ctan.org
+%\usepackage{graphics} % for pdf, bitmapped graphics files
+%\usepackage{epsfig} % for postscript graphics files
+%\usepackage{mathptmx} % assumes new font selection scheme installed
+%\usepackage{times} % assumes new font selection scheme installed
+%\usepackage{amssymb}  % assumes amsmath package installed
+
+\input{titulo.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\selectlanguage{brazil}
+
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+% redefinindo abstract como resumo
+\renewenvironment{abstract}{\small \bf {\textit{Resumo}---}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{abstract.tex}
+\input{introducao.tex}
+\input{software.tex}
+\input{simulador.tex}
+\input{previsao.tex}
+\input{hardware.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{99}
+
+\bibitem{c1} UMBAUGH, S. E.; Digital Image Processing and Analysis: Human and Computer Vision Applications with CVIPtools, Second Edition, CRC Press,November 19, 2010
+\bibitem{c2} ALVES, S. F. R.; FERASOLI FILHO, H.; PEGORARO, R.; CALDEIRA, M. A. C.; ROSARIO, J. M.; YONEZAWA, W. M.; Proposal of educational environments with mobile robots; Conference on Robotics, Automation and Mechatronics (RAM), 2011.
+\bibitem{c3} COSTA, A. H. R. ; PEGORARO, R. . Construindo rob{\^o}s aut{\^o}nomos para partidas de futebol: o time GUARAN{\'a}. Controle \& Automa{\c c}{\~a}o, Campinas, SP, v. 11, n. 2, p. 141-149, 2000.
+\bibitem{c4} KHATIB, O.; Command Dynamic dans l'Espace Op{\'e}rationnel des Robots Manipulateurs en Pr{\'e}sence d'Osbtacles. PhD thesis, Ecole Nationale Sup{\'e}rieure de l'A{\'e}ronautique et de l'Espace, Toulouse. em Franc{\^e}s. 1980.
+\bibitem{c5} CONNOLLY, C. I., BURNS, J. B.; WEISS, R. Path planning using laplaces equation. In IEEE International Conference on Robotics and Automation, 1990.
+\bibitem{c6} CONNOLLY, C. I.; GRUPEN, R. A. On the application of harmonic functions to robotics. Journal of Robotic Systems, 10:931-946, 1993. Placa Arduino Nano 3.0. Dispom{\'i}vel em: <http://arduino.cc/en/Main/ArduinoBoardNano> Acesso em 3 de agosto de 2014.
+\bibitem{c7} SANTOS, Rafael, Mecanismo de Previs{\~a}o de Posi{\c c}{\~a}o para o Time de Futebol de Rob{\^o}s da UNESP, Trabalho de Conclus{\~a}o de Curso do Curso, UNESP - Universidade Estadual Paulista ''J{\'u}lio de Mesquita Filho'', Bauru, Brasil, Fev. 2017.
+
+\end{thebibliography}
+
+
+
+\end{document}
