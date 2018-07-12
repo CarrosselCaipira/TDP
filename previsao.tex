@@ -1,19 +1,19 @@
-\section{PREVIS{\~A}O DE POSI{\c C}{\~A}O}
+\section{PREVISÃO DE POSI{\c C}ÃO}
 
-Para possibilitar futuramente a realiza{\c c}{\~a}o de passes e
-aumentar a acur{\'a}cia dos jogadores com rela{\c c}{\~a}o a bola, est{\'a} foi
-desenvolvido um sistema de previs{\~a}o de posi{\c c}{\~a}o da bola e dos demais 
+Para possibilitar futuramente a realização de passes e
+aumentar a acurácia dos jogadores com relação a bola, está foi
+desenvolvido um sistema de previsão de posição da bola e dos demais 
 componentes em campo com base no simulador do time Carrossel Caipira.
-Como as informa{\c c}{\~o}es do m{\'o}dulo de previs{\~a}o ser{\~a}o usadas pelo
-módulo da estratégia, a previs{\~a}o deve ocorrer antes da defini{\c c}{\~a}o do pr{\'o}ximo objetivo. 
-Sendo assim, este m{\'o}dulo foi inserido entre o módulo de visão e de estratégia.
+Como as informações do módulo de previsão serão usadas pelo
+módulo da estratégia, a previsão deve ocorrer antes da definição do próximo objetivo. 
+Sendo assim, este módulo foi inserido entre o módulo de visão e de estratégia.
 
 Em uma partida existem dois momentos, o de previsão e o de jogo. Enquanto o sistema
-está em jogo, todos os m{\'o}dulos trabalham para que cada jogador exer{\c c}a sua fun{\c c}{\~a}o. J{\'a} no
-estado de previs{\~a}o, suas fun{\c c}{\~o}es ficam restritas a simular o comportamento de todos os
+está em jogo, todos os módulos trabalham para que cada jogador exerça sua função. Já no
+estado de previsão, suas funções ficam restritas a simular o comportamento de todos os
 componentes em campo por um determinado espaço de tempo, porém sem que haja o acionamento dos robôs.
 
-Durante a previs{\~a}o, o m{\'o}dulo de estrat{\'e}gia {\'e} executado utilizando as posi{\c c}{\~o}es 
-atuais dos rob{\^o}s e atualiz{\'a}-las com base em seus respectivos roteiros. Atualmente {\'e} feita uma
-previs{\~a}o de 30 itera{\c c}{\~o}es, o que corresponde a 1 segundo, que é o suficiente para melhorar o 
+Durante a previsão, o módulo de estratégia é executado utilizando as posições 
+atuais dos robôs e atualizá-las com base em seus respectivos roteiros. Atualmente é feita uma
+previsão de 30 iterações, o que corresponde a 1 segundo, que é o suficiente para melhorar o 
 desempenho e continuar tendo um previsão realista.   
