@@ -1,159 +1,73 @@
-\section{SISTEMA DE SOFTWARE DO FUTEBOL DE ROB{\^O}S}
+\section{SISTEMA DE SOFTWARE DO FUTEBOL DE ROBÔS}
 
-O sistema deste time pode ser representado
-simplificadamente atrav{\'e}s do diagrama apresentado na Fig. 2
-que indica as partes principais do processamento. Estas partes
-s{\~a}o descritas, juntamente com as intera{\c c}ões entre elas, na
-sequ{\^e}ncia. A C{\^A}MERA captura uma imagem do campo que {\'e}
-digitalizada por uma placa espec{\'i}fica. Esta imagem {\'e} processada pelo m{\'o}dulo de 
-VIS{\~A}O que determinar{\'a} as posi{\c c}{\~o}es atuais dos rob{\^o}s a partir de suas etiquetas coloridas 
-e a da bola que possui cor alaranjada. A PREVIS{\~A}O, com base das informações recebidas do m{\'o}dulo da
-VIS{\~A}O, define as posi{\c c}{\~o}es mais prov{\'a}veis que os objetos em campo ir{\~a}o 
-assumir alguns instantes a frente. Com estas posi{\c c}{\~o}es (presente e futura). O m{\'o}dulo de
-ESTRAT{\'E}GIA calcula os locais do campo que os rob{\^o}s do time controlado dever{\~a}o se posicionar. 
-Para realizar estes c{\'a}lculos, este m{\'o}dulo faz uso de roteiros, que são específicos para cada rob{\^o}.
-Basicamente, um roteiro {\'e} um conjunto de comportamentos espec{\'i}ficos para cara rob{\^o} que faz com que
-este assuma uma postura defensiva ou ofenciva durante uma partida. O m{\'o}dulo de CONTROLE, fazendo uso das 
-posi{\c c}{\~a}o atuais de cada rob{\^o} (VIS{\~A}O) e de seus objetivos (ESTRAT{\'E}GIA), determina maior
-velocidade poss{\'i}vel que um rob{\^o} pode assumir para que este consiga chegar ao seu objetivo e parar,
-definindo os valores de cada roda a serem enviados aos rob{\^o}s via r{\'a}dio, fazendo os rob{\^o}s se moverem 
-para concluir a estrat{\'e}gia. Todos estes m{\'o}dulos s{\~a}o executados no computador pessoal.
+O sistema deste time pode ser representado simplificadamente através do diagrama apresentado na Fig. \ref{fig:esquema_software} que indica as partes principais do processamento. Estas partes são descritas, juntamente com as interações entre elas, na sequência. A CÂMERA captura uma imagem do campo, esta imagem é então processada pelo módulo de VISÃO que determinará as posições atuais dos robôs a partir de suas etiquetas coloridas e a da bola que possui cor alaranjada. A PREVISÃO, com base das informações recebidas do módulo da VISÃO, define as posições mais prováveis que os objetos em campo irão assumir alguns instantes a frente. Com estas posições (presente e futura). O módulo de ESTRATÉGIA calcula os locais do campo que os robôs do time controlado deverão se posicionar. Para realizar estes cálculos, este módulo faz uso de roteiros, que são específicos para cada robô. Basicamente, um roteiro é um conjunto de comportamentos específicos para cara robô que faz com que este assuma uma postura defensiva ou ofenciva durante uma partida. O módulo de CONTROLE, fazendo uso das posição atuais de cada robô (VISÃO) e de seus objetivos (ESTRATÉGIA), determina maior velocidade possível que um robô pode assumir para que este consiga chegar ao seu objetivo e parar, definindo os valores de cada roda a serem enviados aos robôs via rádio, fazendo os robôs se moverem para concluir a estratégia. Todos estes módulos são executados no computador pessoal.
 
-% FIGURA 2
+% FIGURA
 \begin{figure}[!htb]
-\centering
-\includegraphics[width=240pt, height=160pt]{novo_carrosselTDP.png}
-\caption{Diagrama simplificado dos m{\'o}dulos do time Carrossel Caipira.}
-\label{Rotulo}
+  \centering
+  % \includegraphics[width=240pt, height=190pt]{esquema_software.jpg}
+  \includegraphics[scale=0.35]{esquema_software.jpg}
+  \caption{Diagrama simplificado dos módulos do time Carrossel Caipira.}
+  \label{fig:esquema_software}
 \end{figure}
 %%%
 
-\subsection{M{\'o}dulo da Vis{\~a}o}
+\subsection{Módulo da Visão}
 
-No ambiente de futebol de rob{\^o}s toda a estrat{\'e}gia e o
-controle, tanto de baixo n{\'i}vel quanto de alto n{\'i}vel, s{\~a}o
-baseados na interpreta{\c c}{\~a}o das imagens captadas pela c{\^a}mera.
-Para que isso seja realizado, etiquetas de cores em destaque
-localizadas no topo dos rob{\^o}s identificam cada um deles, em
-rela{\c c}{\~a}o a seu time e possivelmente sua fun{\c c}{\~a}o, conforme
-demonstra a Fig. 3.
+No ambiente de futebol de robôs toda a estratégia e o controle, tanto de baixo nível quanto de alto nível, são baseados na interpretação das imagens captadas pela câmera. Para que isso seja realizado, etiquetas de cores em destaque localizadas no topo dos robôs identificam cada um deles, em relação a seu time e possivelmente sua função, conforme demonstra a Fig. \ref{fig:etiqueta}.
 
-O tempo de execu{\c c}{\~a}o do ciclo de controle do sistema foi
-definido pela taxa de aquisi{\c c}{\~a}o de imagens. Como o time
-Carrossel Caipira usa c{\^a}meras de v{\'i}deo convencionais, a taxa {\'e}
-limitada a 30 quadros por segundo. Portanto, a cada per{\'i}odo de
-33 ms, uma nova imagem refletindo o estado atual do campo
-torna-se dispon{\'i}vel ao computador para processamento. Cada
-uma dessas imagens {\'e} capturada e digitalizada por uma placa
-de captura, que disponibiliza, na forma de uma matriz com
-dimensões 640x480 pixels com tr{\^e}s canais (componentes Red,
-Green, Blue - RGB). Cada um desses pixels deve ser analisado,
-quanto a sua cor, para identificar se {\'e} uma cor de import{\^a}ncia
-ao sistema, esta t{\'e}cnica {\'e} chamada de segmenta{\c c}{\~a}o de cor.
+O tempo de execução do ciclo de controle do sistema foi definido pela taxa de aquisição de imagens. Como o time Carrossel Caipira usa câmeras de vídeo convencionais, a taxa é limitada a 30 quadros por segundo. Portanto, a cada período de 33 ms, uma nova imagem refletindo o estado atual do campo torna-se disponível ao computador para processamento. Cada uma dessas imagens é capturada e digitalizada por uma placa
+de captura, que disponibiliza, na forma de uma matriz com dimensões 640x480 pixels com três canais (componentes Red, Green, Blue - RGB). Cada um desses pixels deve ser analisado, quanto a sua cor, para identificar se é uma cor de importância ao sistema, esta técnica é chamada de segmentação de cor.
 
-% FIGURA 3
+% FIGURA
 \begin{figure}[!htb]
 \centering
 \includegraphics[scale=0.9]{etiqueta.png}
-\caption{ Etiqueta de identifica{\c c}{\~a}o do rob{\^o}}
-\label{Rotulo}
+\caption{ Etiqueta de identificação do robô}
+\label{fig:etiqueta}
 \end{figure}
 %%%
 
-\subsection{M{\'o}dulo de Estrat{\'e}gia}
+\subsection{Módulo de Estratégia}
 
-A estrat{\'e}gia {\'e} o m{\'o}dulo respons{\'a}vel por definir a meta de
-cada rob{\^o}. Utilizando as coordenadas atuais e previstas da bola, dos
-rob{\^o}s do time e dos advers{\'a}rios este m{\'o}dulo decide qual {\'e} a posi{\c c}{\~a}o 
-mais indicada para cada rob{\^o} do time, de tal forma que corresponda ao comportamento que
-os rob{\^o}s devem desempenhar na partida. No caso do time Carrossel Caipira
-tem-se tr{\^e}s tipos de comportamentos: goleiro, defensor e
-atacante.
+A estratégia é o módulo responsável por definir a meta de cada robô. Utilizando as coordenadas da bola, dos robôs do time e dos adversários este módulo decide qual é a posição mais indicada para cada robô do time através dos roteiros. Os roteiros são basicamente conjuntos de regras que ditam o comportamento do robô em cada situação. Com as posições pré-determinadas no módulo de posicionamentos e com os comportamentos padronizados no módulo de comportamentos, os roteiros são montados pensando nas situações de jogo. A vantagem deste modelo em relação aos antigos é que através da padronização dos elementos mais básicos da estratégia através destes dois novos módulos é possível montar facilmente montar novos roteiros, o que permite que o time possua diversas posturas às mais diversas situações de jogo, sendo mais ofensivo quando estiver atrás no placar ou mais defensivo quando se deseja tentar manter o resultado, por exemplo.
 
-{\bf Goleiro}: O rob{\^o} {\'e} posicionado na proje{\c c}{\~a}o da posi{\c c}{\~a}o da
-bola com a linha defensiva do gol, se a bola vir diretamente na
-dire{\c c}{\~a}o da regi{\~a}o do gol. Caso contr{\'a}rio o rob{\^o} se alinha com a
-bola na coordenada y do sistema, dessa forma sempre permanecendo em
-frente ao gol. Para permitir que o posicionamento seja r{\'a}pido, o rob{\^o} deve
-manter sua orienta{\c c}{\~a}o em 90 ou 270 graus, como {\'e} mostrado
-na Fig. 4.
+\subsection{Módulo de Controle}
 
-% FIGURA 4
-\begin{figure}[!htb]
-\centering
-\includegraphics[scale=0.5]{pos_goleiro.png}
-\caption{Comportamento do goleiro. Fonte: Costa et al. [3].}
-\label{Rotulo}
-\end{figure}
-%%%
+A partir das coordenadas detectadas pelo módulo de Visão e das coordenadas atribuídas pelos resultados do módulo de Estratégia, o módulo de Controle deve determinar as melhores trajetórias e comandos a ser enviados aos robôs. O cálculo de uma trajetória deve levar em conta o desvio de obstáculos, evitando os outros robôs na arena. Este cálculo é necessário para levar o robô da sua posição atual até a determinada pela estratégia. No caso do time Carrossel Caipira, é empregado um método chamado de campo potencial. Os campos potenciais partem da ideia de forças imaginárias atuando sobre o robô, ideia proposta por Khatib [4], na qual a ''força causada'' pelos obstáculos é de caráter repulsivo e pela meta, de caráter atrativo. Porém a interferência das ''forças'' geradas a partir de vários obstáculos podem produzir locais
+ótimos que atrapalham o desempenho do sistema para encontrar um caminho até a meta para o robô.
 
-{\bf Volante}: O rob{\^o} {\'e} posicionado na dire{\c c}{\~a}o da coordenada y
-da bola, bloqueando a bola e impedindo seu avan{\c c}o at{\'e} o gol.
-Mas deve permitir a bola passar se ela estiver sendo conduzida
-pelo atacante. Quando o volante e a bola est{\~a}o em situa{\c c}{\~a}o
-favor{\'a}vel no que diz respeito a um poss{\'i}vel ataque ao gol
-advers{\'a}rio, ele troca de comportamento com o atacante e tenta
-atacar. A situa{\c c}{\~a}o favor{\'a}vel acontece quando o defensor
-estiver pr{\'o}ximo da bola em posi{\c c}{\~a}o de ataque.
-
-{\bf Atacante}: Nesta posi{\c c}{\~a}o existem dois tipos de
-comportamento: (i) modo de posicionamento: quando o
-objetivo {\'e} posicionar o rob{\^o} atr{\'a}s da bola para bloquear algum
-advers{\'a}rio ou deixar o rob{\^o} apto para trocar seu modo; (ii)
-modo de condu{\c c}{\~a}o, quando o rob{\^o} empurra a bola at{\'e} o gol.
-
-Atrav{\'e}s destes comportamentos {\'e} calculada a posi{\c c}{\~a}o que o
-rob{\^o} deve atingir, ou seja, as coordenadas x, y e o {\^a}ngulo que o
-rob{\^o} deve alcan{\c c}ar para realizar a estrat{\'e}gia espec{\'i}ficada por seu roteiro.
-Esta posi{\c c}{\~a}o {\'e} importante para o m{\'o}dulo de Controle, no que se
-refere ao planejamento do caminho {\'o}timo, pois define o fim do
-trajeto (o objetivo) escolhido por ele, bem como o {\^a}ngulo desejado de chegada, permitindo
-calcular a forma como o rob{\^o} deve chegar l{\'a}.
-
-\subsection{M{\'o}dulo de Controle}
-
-A partir das coordenadas detectadas pelo m{\'o}dulo de Vis{\~a}o
-e das coordenadas atribu{\'i}das pelos resultados do m{\'o}dulo de
-Estrat{\'e}gia, o m{\'o}dulo de Controle deve determinar as melhores
-trajet{\'o}rias e comandos a ser enviados aos rob{\^o}s.
-
-O c{\'a}lculo de uma trajet{\'o}ria deve levar em conta o desvio de
-obst{\'a}culos, evitando os outros rob{\^o}s na arena. Este c{\'a}lculo {\'e}
-necess{\'a}rio para levar o rob{\^o} da sua posi{\c c}{\~a}o atual at{\'e} a
-determinada pela estrat{\'e}gia. No caso do time Carrossel Caipira,
-{\'e} empregado um m{\'e}todo chamado de campo potencial. Os
-campos potenciais partem da ideia de for{\c c}as imagin{\'a}rias
-atuando sobre o rob{\^o}, ideia proposta por Khatib [4], na qual a
-''for{\c c}a causada'' pelos obst{\'a}culos {\'e} de car{\'a}ter repulsivo e pela
-meta, de car{\'a}ter atrativo. Por{\'e}m a interfer{\^e}ncia das ''for{\c c}as''?
-geradas a partir de v{\'a}rios obst{\'a}culos podem produzir locais
-{\'o}timos que atrapalham o desempenho do sistema para
-encontrar um caminho at{\'e} a meta para o rob{\^o}.
-
-Para evitar esta situa{\c c}{\~a}o, Connoly et al. [5] solucionaram
-o problema utilizando fun{\c c}ões harm{\^o}nicas para o c{\'a}lculo do
-campo potencial de ambientes nos quais as posi{\c c}ões das
-paredes, objetos e metas sejam conhecidas, que {\'e} o caso do
-ambiente de futebol de rob{\^o}s. As fun{\c c}ões harm{\^o}nicas
-utilizadas s{\~a}o solu{\c c}ões para a equa{\c c}{\~a}o de Laplace (1).
+Para evitar esta situação, Connoly et al. [5] solucionaram o problema utilizando funções harmônicas para o cálculo do campo potencial de ambientes nos quais as posições das paredes, objetos e metas sejam conhecidas, que é o caso do ambiente de futebol de robôs. As funções harmônicas utilizadas são soluções para a equação de Laplace (1).
+%
 \begin{equation}
 \nabla = 0 \ para \ P : R \rightarrow R .
 \end{equation}
 
-Assim {\'e} definido um Problema de Valor de Contorno na
-regi{\~a}o de atua{\c c}{\~a}o do rob{\^o} utilizando a condi{\c c}{\~a}o de Dirichlet%
-\footnote{A condição de contorno de Dirichlet (ou de primeiro tipo) é um tipo
-de condição de contorno, nomeada em homenagem a Johann Peter
-Gustav Lejeune Dirichlet (1805-1859). Quando aplicada sobre uma
-equação diferencial ordinária ou parcial, especifica os valores que uma
-solução necessita para tomar-se sobre o contorno do domínio
-}
-com potencial alto para obst{\'a}culos e potencial baixo para a
-meta. Ent{\~a}o, s{\~a}o extra{\'i}das as linhas de for{\c c}a, com base no
-gradiente descendente [5][6] do potencial, que direcionam o
-rob{\^o} para sua meta, desviando-o de obst{\'a}culos.
+Assim é definido um Problema de Valor de Contorno na região de atuação do robô utilizando a condição de Dirichlet%
+%
+\footnote{A condição de contorno de Dirichlet (ou de primeiro tipo) é um tipo de condição de contorno, nomeada em homenagem a Johann Peter Gustav Lejeune Dirichlet (1805-1859). Quando aplicada sobre uma equação diferencial ordinária ou parcial, especifica os valores que uma solução necessita para tomar-se sobre o contorno do domínio}
+%
+com potencial alto para obstáculos e potencial baixo para a meta. Então, são extraídas as linhas de força, com base no gradiente descendente [5][6] do potencial, que direcionam o robô para sua meta, desviando-o de obstáculos.
 
-Uma vez obtido o campo potencial, tem-se o {\^a}ngulo ideal
-que o rob{\^o} deve atingir para se deslocar at{\'e} a meta, que
-chamamos de {\^a}ngulo objetivo, basta agora calcular a dire{\c c}{\~a}o e
-velocidade de cada motor. 
+Uma vez obtido o campo potencial, tem-se o ângulo ideal que o robô deve atingir para se deslocar até a meta, que chamamos de ângulo objetivo, basta agora calcular a direção e velocidade de cada motor.
+
+\subsection{Interface}
+
+Para comportar toda essas mudanças feitas em diversos módulos da equipe foi também desenvolvida uma nova interface, tendo em mente praticidade e as necessidades de comportar novas funcionalidades. A nova interface foi feita utilizando abas para as principais seções, entre a principal, configurações, outros e ajuda, como pode ser observado na Fig. \ref{fig:interface}.
+
+Na aba principal o foco foi deixar de fácil acesso as funções indispensáveis durante o jogo, entre uma tela para mostrar o q está sendo captado pela câmera, uma tabela para logs e botões para iniciar o software além de situação em que o jogo está, como jogo normal, disputa de bola, w.o., entre outros.
+
+Na aba de configurações se encontram as principais configurações indispensáveis para setup do software, entre escolha dos roteiros, calibração da visão entre outras.
+
+Na aba outros, foram colocadas configurações que geralmente não são usadas, porém podem vir a ser necessárias em situações inesperadas, entre uma opção para gravação em buffer de alguns frames de jogo, uma opção para capturar uma imagem do campo vazio, entre outras.
+
+Finalmente a aba ajuda tem por finalidade explicar as mais diversas funcionalidades do programa, através de uma estrutura separada em seções, pessoas que não conhecem o software podem aprender sobre como utilizá-lo.
+
+% FIGURA
+\begin{figure}[!htb]
+\centering
+\includegraphics[scale=0.3]{interface.png}
+\caption{Nova interface na aba de configurações.}
+\label{fig:interface}
+\end{figure}
+%%%
