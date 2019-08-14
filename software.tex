@@ -1,14 +1,14 @@
 \section{SISTEMA DE SOFTWARE DO FUTEBOL DE ROBÔS}
 
-O sistema deste time pode ser representado simplificadamente através do diagrama apresentado na Fig. \ref{fig:esquema_software} que indica as partes principais do processamento. Estas partes são descritas, juntamente com as interações entre elas, na sequência. A CÂMERA captura uma imagem do campo, esta imagem é então processada pelo módulo de VISÃO que determinará as posições atuais dos robôs a partir de suas etiquetas coloridas e a da bola que possui cor alaranjada. A PREVISÃO, com base das informações recebidas do módulo da VISÃO, define as posições mais prováveis que os objetos em campo irão assumir alguns instantes a frente. Com estas posições (presente e futura). O módulo de ESTRATÉGIA calcula os locais do campo que os robôs do time controlado deverão se posicionar. Para realizar estes cálculos, este módulo faz uso de roteiros, que são específicos para cada robô. Basicamente, um roteiro é um conjunto de comportamentos específicos para cara robô que faz com que este assuma uma postura defensiva ou ofenciva durante uma partida. O módulo de CONTROLE, fazendo uso das posição atuais de cada robô (VISÃO) e de seus objetivos (ESTRATÉGIA), determina maior velocidade possível que um robô pode assumir para que este consiga chegar ao seu objetivo e parar, definindo os valores de cada roda a serem enviados aos robôs via rádio, fazendo os robôs se moverem para concluir a estratégia. Todos estes módulos são executados no computador pessoal.
+O sistema deste time pode ser representado simplificadamente através do diagrama apresentado na Fig. \ref{fig:esquema_software} que indica as partes principais do processamento. Estas partes são descritas, juntamente com as interações entre elas, na sequência. A CÂMERA captura uma imagem do campo, esta imagem é então processada pelo módulo de VISÃO que determinará as posições atuais dos robôs a partir de suas etiquetas coloridas e a da bola que possui cor alaranjada. A PREVISÃO, com base das informações recebidas do módulo da VISÃO, define as posições mais prováveis que os objetos em campo irão assumir alguns instantes a frente. Com estas posições (presente e futura). O módulo de ESTRATÉGIA calcula os locais do campo que os robôs do time controlado deverão se posicionar. Para realizar estes cálculos, este módulo faz uso de roteiros, que são específicos para cada robô. Basicamente, um roteiro é um conjunto de comportamentos específicos para cara robô que faz com que este assuma uma postura defensiva ou ofensiva durante uma partida. O módulo de CONTROLE, fazendo uso das posição atuais de cada robô (VISÃO) e de seus objetivos (ESTRATÉGIA), determina maior velocidade possível que um robô pode assumir para que este consiga chegar ao seu objetivo e parar, definindo os valores de cada roda a serem enviados aos robôs pelo módulo de RÁDIO, fazendo os robôs se moverem para concluir a estratégia. Todos estes módulos são executados no computador pessoal.
 
 % FIGURA
 \begin{figure}[!htb]
-  \centering
-  % \includegraphics[width=240pt, height=190pt]{esquema_software.jpg}
-  \includegraphics[scale=0.35]{esquema_software.png}
-  \caption{Diagrama simplificado dos módulos do time Carrossel Caipira.}
-  \label{fig:esquema_software}
+    \centering
+    % \includegraphics[width=240pt, height=190pt]{esquema_software.jpg}
+        \includegraphics[scale=0.29]{imagens/diagrama.png}
+        \caption{Diagrama simplificado dos módulos do time Carrossel Caipira.}
+    \label{fig:esquema_software}
 \end{figure}
 %%%
 
@@ -19,12 +19,14 @@ No ambiente de futebol de robôs toda a estratégia e o controle, tanto de baixo
 O tempo de execução do ciclo de controle do sistema foi definido pela taxa de aquisição de imagens. Como o time Carrossel Caipira usa câmeras de vídeo convencionais, a taxa é limitada a 30 quadros por segundo. Portanto, a cada período de 33 ms, uma nova imagem refletindo o estado atual do campo torna-se disponível ao computador para processamento. Cada uma dessas imagens é capturada e digitalizada por uma placa
 de captura, que disponibiliza, na forma de uma matriz com dimensões 640x480 pixels com três canais (componentes Red, Green, Blue - RGB). Cada um desses pixels deve ser analisado, quanto a sua cor, para identificar se é uma cor de importância ao sistema, esta técnica é chamada de segmentação de cor.
 
+O processamento da imagem é realizado em um software baseado em um projeto de código aberto denominado VSS-SDK\footnote{O código do VSS-SDK está disponível em: https://github.com/VSS-SDK/VSS-Vision}, que já realiza todo o pré tratamento dos quadros e envia as informações de posição e orientação dos robôs e da bola aos módulos de estratégia e controle.
+
 % FIGURA
 \begin{figure}[!htb]
-\centering
-\includegraphics[scale=0.9]{etiqueta.png}
-\caption{ Etiqueta de identificação do robô}
-\label{fig:etiqueta}
+    \centering
+        \includegraphics[scale=0.9]{etiqueta.png}
+        \caption{ Etiqueta de identificação do robô}
+    \label{fig:etiqueta}
 \end{figure}
 %%%
 
@@ -40,16 +42,30 @@ A partir das coordenadas detectadas pelo módulo de Visão e das coordenadas atr
 Para evitar esta situação, Connoly et al. [5] solucionaram o problema utilizando funções harmônicas para o cálculo do campo potencial de ambientes nos quais as posições das paredes, objetos e metas sejam conhecidas, que é o caso do ambiente de futebol de robôs. As funções harmônicas utilizadas são soluções para a equação de Laplace (1).
 %
 \begin{equation}
-\nabla = 0 \ para \ P : R \rightarrow R .
+    \nabla = 0 \ para \ P : R \rightarrow R .
 \end{equation}
 
 Assim é definido um Problema de Valor de Contorno na região de atuação do robô utilizando a condição de Dirichlet%
 %
 \footnote{A condição de contorno de Dirichlet (ou de primeiro tipo) é um tipo de condição de contorno, nomeada em homenagem a Johann Peter Gustav Lejeune Dirichlet (1805-1859). Quando aplicada sobre uma equação diferencial ordinária ou parcial, especifica os valores que uma solução necessita para tomar-se sobre o contorno do domínio}
 %
-com potencial alto para obstáculos e potencial baixo para a meta. Então, são extraídas as linhas de força, com base no gradiente descendente [5][6] do potencial, que direcionam o robô para sua meta, desviando-o de obstáculos.
+com potencial alto para obstáculos e potencial baixo para a meta. Então, são extraídas as linhas de força, com base no gradiente descendente [5][6] do potencial, que direcionam o robô para sua meta, desviando-o de obstáculos, uma representação do campo com os campos potenciais se encontra da Fig. \ref{f.CP}.
 
 Uma vez obtido o campo potencial, tem-se o ângulo ideal que o robô deve atingir para se deslocar até a meta, que chamamos de ângulo objetivo, basta agora calcular a direção e velocidade de cada motor.
+
+% FIGURA 6
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[scale=0.3]{imagens/simulador_CP.png}
+        \caption{Representação do campo potencial no qual os quadrados preto, verde e azul representam respectivamente meta, robô e obstáculo.}
+    \label{f.CP}
+\end{figure}
+
+\subsection{Módulo de Rádio}
+
+Para garantir melhor eficiência e velocidade de resposta dos robôs foi decidido a criação de um módulo próprio para as funcionalidades de comunicação.
+
+Esse módulo opera de modo paralelo aos outros módulos, enviando as instruções aos robôs apenas quando necessário de modo a evitar o sobrecarregamento tanto do transmissor conectado ao computador quanto dos receptores acoplados nos robôs. Ao operar em paralelo também evita-se que o software principal precise arcar com uma quantidade elevada de entrada e saída, o que compromete o desempenho deste, que já é responsável por realizar todos os cálculos.
 
 \subsection{Interface}
 
@@ -65,9 +81,9 @@ Finalmente a aba ajuda tem por finalidade explicar as mais diversas funcionalida
 
 % FIGURA
 \begin{figure}[!htb]
-\centering
-\includegraphics[scale=0.3]{interface.png}
-\caption{Nova interface na aba de configurações.}
-\label{fig:interface}
+    \centering
+        \includegraphics[scale=0.3]{interface.png}
+        \caption{Nova interface na aba de configurações.}
+    \label{fig:interface}
 \end{figure}
 %%%

@@ -13,6 +13,7 @@
 % funcoes matematicas
 \usepackage{amsmath} % assumes amsmath package installed
 % Define o caminho das figuras
+\usepackage[utf8]{inputenc} % Adicionado depois, ver se no build final não dá conflito
 \graphicspath{{imagens/}}
 
 \IEEEoverridecommandlockouts                              % This command is only needed if
@@ -39,7 +40,7 @@
 \selectlanguage{brazil}
 
 
-\maketitle
+\maketitle % Segundo o Danilo gera uma porrada de erros porque tem muitos autores
 \thispagestyle{empty}
 \pagestyle{empty}
 
@@ -51,7 +52,7 @@
 \input{abstract.tex}
 \input{introducao.tex}
 \input{software.tex}
-\input{simulador.tex}
+% \input{simulador.tex}
 %\input{previsao.tex}
 \input{hardware.tex}
 
